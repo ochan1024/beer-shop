@@ -1,4 +1,4 @@
-import { Tag } from 'store/tags/types'
+import { Tag } from '../tags/types'
 
 export interface Beer {
   id: number;
