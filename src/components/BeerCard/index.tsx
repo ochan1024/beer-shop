@@ -30,7 +30,8 @@ class BeerCard extends React.PureComponent<Props> {
 
   public render() {
     const {
-      beer: { name, image, price }
+      beer: { name, image, price },
+      cartItemCount
     } = this.props;
 
     return (
@@ -51,6 +52,8 @@ class BeerCard extends React.PureComponent<Props> {
           </InfoContainer>
         </TopCotainer>
         <BottomContainer>
+          {cartItemCount > 0 && <Button buttonType="secondary">빼기</Button>}
+          <EmptyMargin />
           <Button onClick={this.handleAddItem}>담기</Button>
         </BottomContainer>
       </Container>
@@ -173,4 +176,8 @@ const StockNumber = styled.span`
   font-size: 14px;
   font-weight: 500;
   color: ${Colors.grey800};
+`;
+
+const EmptyMargin = styled.div`
+  width: 8px;
 `;
