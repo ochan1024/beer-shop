@@ -11,6 +11,7 @@ export interface Beer {
 
 export interface BeersState {
   beers: Beer[];
+  isLoadingBeers: boolean;
 }
 
 export const FETCH_BEERS_REQUEST = "FETCH_BEERS_REQUEST";

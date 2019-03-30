@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import styled from 'styled-components'
 
 import BeerCard from '../../components/BeerCard'
+import BeerCardSkeleton from '../../components/BeerCard/Skeleton'
 import { AppState } from '../../store'
 import { fetchBeers } from '../../store/beers/actions'
 
@@ -16,11 +17,20 @@ class BeersPage extends React.PureComponent<Props> {
     }
   }
   public render() {
-    const { beers } = this.props;
+    const { beers, isLoadingBeers } = this.props;
+
+    if (isLoadingBeers) {
+      return (
+        <Container>
+          <BeerCardSkeleton />
+          <BeerCardSkeleton />
+          <BeerCardSkeleton />
+        </Container>
+      );
+    }
 
     return (
       <Container>
-        beer list
         {beers.map(beer => (
           <BeerCard key={beer.id} beer={beer} />
         ))}
@@ -28,8 +38,10 @@ class BeersPage extends React.PureComponent<Props> {
     );
   }
 }
+
 const mapStateToProps = (state: AppState) => ({
-  beers: state.beersReducer.beers
+  beers: state.beersReducer.beers,
+  isLoadingBeers: state.beersReducer.isLoadingBeers
 });
 
 const mapDispatchToProps = {
