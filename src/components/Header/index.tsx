@@ -24,8 +24,9 @@ const Container = styled.div`
   justify-content: space-between;
   align-items: center;
   background-color: ${Colors.white};
-  box-shadow: 0 2px 2px 0 ${Colors.greyOpacity10};
+  box-shadow: 0 1px 2px 0 ${Colors.greyOpacity10};
   padding: 0 16px;
+  margin-bottom: 12px;
 `;
 
 const ButttonsContainer = styled.div`

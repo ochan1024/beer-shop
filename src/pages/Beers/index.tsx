@@ -1,6 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import styled from 'styled-components'
 
+import BeerCard from '../../components/BeerCard'
 import { AppState } from '../../store'
 import { fetchBeers } from '../../store/beers/actions'
 
@@ -17,12 +19,12 @@ class BeersPage extends React.PureComponent<Props> {
     const { beers } = this.props;
 
     return (
-      <>
+      <Container>
         beer list
-        {beers.map(({ name }) => (
-          <>{name}</>
+        {beers.map(beer => (
+          <BeerCard beer={beer} />
         ))}
-      </>
+      </Container>
     );
   }
 }
@@ -47,3 +49,8 @@ export default connect(
   mapDispatchToProps,
   mergeProps
 )(BeersPage);
+
+const Container = styled.div`
+  padding: 0 12px;
+  flex: 1;
+`;
