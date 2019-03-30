@@ -66,6 +66,7 @@ export default class Button extends React.PureComponent<OwnProps> {
 
 interface ButtonContainerProps {
   toggled?: boolean;
+  isLoading?: boolean;
   buttonType?: ButtonType;
 }
 

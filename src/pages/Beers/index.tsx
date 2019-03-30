@@ -4,6 +4,7 @@ import styled, { css } from 'styled-components'
 
 import BeerCard from '../../components/BeerCard'
 import BeerCardSkeleton from '../../components/BeerCard/Skeleton'
+import Tags from '../../components/Tags'
 import { AppState } from '../../store'
 import { fetchBeers, increaseLimit } from '../../store/beers/actions'
 import { Colors } from '../../utils/constants'
@@ -23,28 +24,30 @@ class BeersPage extends React.PureComponent<Props> {
 
   public componentDidMount() {
     const { fetchBeers, beers, isLoadingBeers } = this.props;
+
     if (beers.length === 0 && !isLoadingBeers) {
       fetchBeers();
     }
   }
+
   public render() {
     const { isLoadingBeers } = this.props;
 
-    if (isLoadingBeers) {
-      return (
-        <Container>
-          <BeerCardSkeleton />
-          <BeerCardSkeleton />
-          <BeerCardSkeleton />
-        </Container>
-      );
-    }
-
     return (
       <Container>
-        {this.paginatedBeers.map(beer => (
-          <BeerCard key={beer.id} beer={beer} />
-        ))}
+        <Tags />
+        {isLoadingBeers ? (
+          <>
+            <BeerCardSkeleton />
+            <BeerCardSkeleton />
+            <BeerCardSkeleton />
+          </>
+        ) : (
+          this.paginatedBeers.map(beer => (
+            <BeerCard key={beer.id} beer={beer} />
+          ))
+        )}
+
         {this.shouldShowLoadMore && (
           <BottomContainer>
             <LoadMoreButton onClick={this.handleLoadMore}>
@@ -62,9 +65,7 @@ class BeersPage extends React.PureComponent<Props> {
 }
 
 const mapStateToProps = (state: AppState) => ({
-  beers: state.beersReducer.beers,
-  isLoadingBeers: state.beersReducer.isLoadingBeers,
-  limit: state.beersReducer.limit
+  ...state.beersReducer
 });
 
 const mapDispatchToProps = {
