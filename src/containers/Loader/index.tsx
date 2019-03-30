@@ -22,12 +22,8 @@ class Loader extends React.PureComponent<Props> {
   public render() {
     const { isLoaderVisible } = this.props;
 
-    if (!isLoaderVisible) {
-      return null;
-    }
-
     return (
-      <Modal>
+      <Modal isVisible={isLoaderVisible}>
         <Lottie options={lottieOptions} width={400} height={400} />
       </Modal>
     );
