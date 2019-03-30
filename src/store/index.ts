@@ -5,8 +5,8 @@ import { beersReducer } from './beers/reducers'
 import { tagsReducer } from './tags/reducers'
 
 const rootReducer = combineReducers({
-  beers: beersReducer,
-  tags: tagsReducer
+  beersReducer,
+  tagsReducer
 });
 
 export type AppState = ReturnType<typeof rootReducer>;

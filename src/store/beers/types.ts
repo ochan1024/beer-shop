@@ -13,11 +13,24 @@ export interface BeersState {
   beers: Beer[];
 }
 
-export const UPDATE_BEERS = "UPDATE_BEERS";
+export const FETCH_BEERS_REQUEST = "FETCH_BEERS_REQUEST";
+export const FETCH_BEERS_SUCCESS = "FETCH_BEERS_SUCCESS";
+export const FETCH_BEERS_FAILURE = "FETCH_BEERS_FAILURE";
+interface FetchBeersRequest {
+  type: typeof FETCH_BEERS_REQUEST;
+}
 
-interface UpdateBeersAction {
-  type: typeof UPDATE_BEERS;
+interface FetchBeersSuccess {
+  type: typeof FETCH_BEERS_SUCCESS;
   payload: Beer[];
 }
 
-export type BeersActionTypes = UpdateBeersAction;
+interface FetchBeersFailure {
+  type: typeof FETCH_BEERS_FAILURE;
+  payload: string;
+}
+
+export type BeersActionTypes =
+  | FetchBeersRequest
+  | FetchBeersSuccess
+  | FetchBeersFailure;

@@ -1,4 +1,4 @@
-import { BeersActionTypes, BeersState, UPDATE_BEERS } from './types'
+import { BeersActionTypes, BeersState, FETCH_BEERS_SUCCESS } from './types'
 
 const initialState: BeersState = {
   beers: []
@@ -9,7 +9,7 @@ export function beersReducer(
   action: BeersActionTypes
 ): BeersState {
   switch (action.type) {
-    case UPDATE_BEERS:
+    case FETCH_BEERS_SUCCESS:
       return {
         beers: action.payload
       };
