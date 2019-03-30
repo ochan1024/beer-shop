@@ -1,26 +1,41 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, RouteComponentProps, withRouter } from 'react-router-dom'
 import styled from 'styled-components'
 
 import { Colors, Icon } from '../../utils/constants'
 
-export default class Header extends React.PureComponent {
+class Header extends React.PureComponent<RouteComponentProps> {
   public render() {
+    const {
+      location: { pathname }
+    } = this.props;
+
     return (
       <Container>
         <Title>맥주담기</Title>
         <ButttonsContainer>
           <Link to={"/beers"}>
-            <Icon.List style={{ marginRight: "14px" }} />
+            <Icon.List
+              style={{ marginRight: "14px" }}
+              fillColor={
+                pathname === "/beers" ? Colors.blue500 : Colors.grey700
+              }
+            />
           </Link>
           <Link to={"/cart"}>
-            <Icon.Cart />
+            <Icon.Cart
+              fillColor={pathname === "/cart" ? Colors.blue500 : Colors.grey700}
+            />
           </Link>
         </ButttonsContainer>
       </Container>
     );
   }
 }
+
+export default withRouter((props: RouteComponentProps) => (
+  <Header {...props} />
+));
 
 const Container = styled.div`
   position: fixed;
