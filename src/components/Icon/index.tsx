@@ -7,3 +7,4 @@ export interface IconProps {
 
 export { default as Cart } from "./generated/Cart";
 export { default as List } from "./generated/List";
+export { default as Bag } from "./generated/Bag";

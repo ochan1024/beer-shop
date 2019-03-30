@@ -5,6 +5,7 @@ import styled from 'styled-components'
 import { AppState } from '../../store'
 import { fetchBeers } from '../../store/beers/actions'
 import { addCartItem, removeCartItem } from '../../store/cart/actions'
+import EmptyCart from './Empty'
 
 type Props = Readonly<ReturnType<typeof mergeProps>>;
 
@@ -19,7 +20,9 @@ class CartPage extends React.PureComponent<Props> {
   public render() {
     const { cartItems } = this.props;
 
-    return <Container>{cartItems.length === 0 ? <></> : <></>}</Container>;
+    return (
+      <Container>{cartItems.length === 0 ? <EmptyCart /> : <></>}</Container>
+    );
   }
 }
 
