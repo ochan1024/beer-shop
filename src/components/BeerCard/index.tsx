@@ -48,13 +48,25 @@ class BeerCard extends React.PureComponent<Props> {
             <StockContainer>
               <StockText>재고</StockText>
               <StockNumber>{this.stockLeft}</StockNumber>
+              {cartItemCount > 0 && (
+                <>
+                  <CartCountText>수량</CartCountText>
+                  <CartCountNumber>{cartItemCount}</CartCountNumber>
+                </>
+              )}
             </StockContainer>
           </InfoContainer>
         </TopCotainer>
         <BottomContainer>
-          {cartItemCount > 0 && <Button buttonType="secondary">빼기</Button>}
+          {cartItemCount > 0 && (
+            <Button buttonType="secondary" onClick={this.handleRemoveItem}>
+              빼기
+            </Button>
+          )}
           <EmptyMargin />
-          <Button onClick={this.handleAddItem}>담기</Button>
+          <Button onClick={this.handleAddItem} disabled={this.stockLeft === 0}>
+            담기
+          </Button>
         </BottomContainer>
       </Container>
     );
@@ -69,6 +81,17 @@ class BeerCard extends React.PureComponent<Props> {
     }
 
     addCartItem(beer.id, addCount);
+  };
+
+  private handleRemoveItem = () => {
+    const { removeCartItem, beer, cartItemCount } = this.props;
+    const removeCount = 1;
+
+    if (cartItemCount - removeCount < 0) {
+      return;
+    }
+
+    removeCartItem(beer.id, removeCount);
   };
 }
 
@@ -109,6 +132,7 @@ const Container = styled.div`
   background-color: ${Colors.white};
   border-radius: 4px;
   box-shadow: 0 1px 3px 0 ${Colors.greyOpacity10};
+  margin-bottom: 12px;
 `;
 
 const TopCotainer = styled.div`
@@ -180,4 +204,16 @@ const StockNumber = styled.span`
 
 const EmptyMargin = styled.div`
   width: 8px;
+`;
+
+const CartCountText = styled.span`
+  font-size: 14px;
+  color: ${Colors.grey700};
+  margin: 0 4px;
+`;
+
+const CartCountNumber = styled.span`
+  font-size: 14px;
+  font-weight: 500;
+  color: ${Colors.grey800};
 `;

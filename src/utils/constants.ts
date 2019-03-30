@@ -11,7 +11,6 @@ export const Colors = {
   grey700: "#6e6e78",
   grey800: "#3c3c42",
   greyOpacity10: "rgba(0, 0, 0, 0.1)",
-  greyOpacity30: "gba(0, 0, 0, 0.38)",
   blue100: "#c9d5f3",
   blue400: "#4e7bfa",
   blue500: "#3369e8"

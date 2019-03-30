@@ -5,7 +5,7 @@ import styled, { css } from 'styled-components'
 import { Colors } from '../../utils/constants'
 
 const secondaryStyle = css`
-  background-color: ${Colors.grey300};
+  background-color: ${Colors.grey200};
   color: ${Colors.grey800};
 `;
 
@@ -100,7 +100,7 @@ const Container = styled.button<ButtonContainerProps>`
     &:disabled {
       cursor: not-allowed;
       background-color: ${Colors.grey300};
-      color: ${Colors.greyOpacity30};
+      color: ${Colors.grey600};
     }
   `};
 `;
