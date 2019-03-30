@@ -60,20 +60,23 @@ class BeerCard extends React.PureComponent<Props> {
             </StockContainer>
           </InfoContainer>
         </TopCotainer>
+
         <BottomContainer>
           {cartItemCount > 0 && (
             <Button buttonType="secondary" onClick={this.handleRemoveItem}>
               {cancelOnly ? "취소" : "빼기"}
             </Button>
           )}
-          <EmptyMargin />
           {!cancelOnly && (
-            <Button
-              onClick={this.handleAddItem}
-              disabled={this.stockLeft === 0}
-            >
-              담기
-            </Button>
+            <>
+              <EmptyMargin />
+              <Button
+                onClick={this.handleAddItem}
+                disabled={this.stockLeft === 0}
+              >
+                담기
+              </Button>
+            </>
           )}
         </BottomContainer>
       </Container>
@@ -108,8 +111,8 @@ class BeerCard extends React.PureComponent<Props> {
 }
 
 const mapStateToProps = (state: AppState, props: OwnProps) => {
-  const { beers } = state.beersReducer;
-  const beer = beers.find(({ id }) => id === props.id);
+  const { beerMap } = state.beersReducer;
+  const beer = beerMap[props.id];
   const cartItem = state.cartReducer.cartItems.find(
     ({ id }) => id === props.id
   );

@@ -7,6 +7,7 @@ import { AppState } from '../../store'
 import { fetchBeers } from '../../store/beers/actions'
 import { addCartItem, removeCartItem } from '../../store/cart/actions'
 import EmptyCart from './Empty'
+import CartFooter from './Footer'
 
 type Props = Readonly<ReturnType<typeof mergeProps>>;
 
@@ -28,6 +29,7 @@ class CartPage extends React.PureComponent<Props> {
         ) : (
           cartItems.map(({ id }) => <BeerCard key={id} id={id} cancelOnly />)
         )}
+        <CartFooter />
       </Container>
     );
   }
@@ -60,5 +62,5 @@ export default connect(
 )(CartPage);
 
 const Container = styled.div`
-  padding: 0 12px;
+  padding: 0 12px 168px 12px;
 `;

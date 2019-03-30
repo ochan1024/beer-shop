@@ -11,6 +11,7 @@ export interface Beer {
 
 export interface BeersState {
   beers: Beer[];
+  beerMap: { [key: number]: Beer };
   isLoadingBeers: boolean;
   limit: number;
 }

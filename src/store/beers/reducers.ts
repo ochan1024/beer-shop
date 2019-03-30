@@ -1,3 +1,4 @@
+import arrayToObject from '../../utils/arrayToObject'
 import {
   BeersActionTypes,
   BeersState,
@@ -9,6 +10,7 @@ import {
 
 const initialState: BeersState = {
   beers: [],
+  beerMap: {},
   isLoadingBeers: false,
   limit: 4
 };
@@ -29,6 +31,7 @@ export function beersReducer(
       return {
         ...state,
         beers: action.payload,
+        beerMap: arrayToObject(action.payload),
         isLoadingBeers: false
       };
     case FETCH_BEERS_FAILURE:
