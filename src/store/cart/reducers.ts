@@ -1,4 +1,3 @@
-import store from '..'
 import { ADD_CART_ITEM, CartActionTypes, CartState, REMOVE_CART_ITEM } from './types'
 
 const initialState: CartState = {
@@ -13,13 +12,6 @@ export function cartReducer(
     case ADD_CART_ITEM: {
       const { id: itemId, count: addCount } = action.payload;
 
-      const { beers } = store.getState().beersReducer;
-      const beer = beers.find(({ id }) => id === itemId);
-      if (!beer) {
-        // invalid item id
-        return state;
-      }
-
       const newCartItems = [...state.cartItems];
       const index = newCartItems.findIndex(({ id }) => id === itemId);
 
@@ -30,9 +22,7 @@ export function cartReducer(
         });
       } else {
         const prevCount = newCartItems[index].count;
-        const newCount =
-          prevCount + addCount > beer.stock ? beer.stock : prevCount + addCount;
-        newCartItems[index].count = newCount;
+        newCartItems[index].count = prevCount + addCount;
       }
 
       return {
@@ -43,13 +33,6 @@ export function cartReducer(
 
     case REMOVE_CART_ITEM: {
       const { id: itemId, count: removeCount } = action.payload;
-
-      const { beers } = store.getState().beersReducer;
-      const beer = beers.find(({ id }) => id === itemId);
-      if (!beer) {
-        // invalid item id
-        return state;
-      }
 
       const newCartItems = [...state.cartItems];
       const index = newCartItems.findIndex(({ id }) => id === itemId);

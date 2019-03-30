@@ -1,7 +1,10 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import styled from 'styled-components'
 
+import { AppState } from '../../store'
 import { Beer } from '../../store/beers/types'
+import { addCartItem, removeCartItem } from '../../store/cart/actions'
 import commaNumber from '../../utils/commaNumber'
 import { Colors } from '../../utils/constants'
 import Button from '../Button'
@@ -11,10 +14,13 @@ interface OwnProps {
   beer: Beer;
 }
 
-export default class BeerCard extends React.PureComponent<OwnProps> {
+type Props = Readonly<ReturnType<typeof mergeProps>>;
+
+class BeerCard extends React.PureComponent<Props> {
   get tagNames() {
     return this.props.beer.tags.map(({ name }) => name).join(", ");
   }
+
   public render() {
     const {
       beer: { name, image, price, stock }
@@ -38,12 +44,48 @@ export default class BeerCard extends React.PureComponent<OwnProps> {
           </InfoContainer>
         </TopCotainer>
         <BottomContainer>
-          <Button>담기</Button>
+          <Button onClick={this.handleAddItem}>담기</Button>
         </BottomContainer>
       </Container>
     );
   }
+
+  private handleAddItem = () => {
+    const { addCartItem, beer, cartItem } = this.props;
+    const addCount = 1;
+
+    if (cartItem && cartItem.count > beer.stock + addCount) {
+      return;
+    }
+
+    addCartItem(beer.id, addCount);
+  };
 }
+
+const mapStateToProps = (state: AppState, props: OwnProps) => ({
+  cartItem: state.cartReducer.cartItems.find(({ id }) => id === props.beer.id)
+});
+
+const mapDispatchToProps = {
+  addCartItem,
+  removeCartItem
+};
+
+const mergeProps = (
+  stateProps: ReturnType<typeof mapStateToProps>,
+  dispatchProps: typeof mapDispatchToProps,
+  ownProps: OwnProps
+) => ({
+  ...stateProps,
+  ...dispatchProps,
+  ...ownProps
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+  mergeProps
+)(BeerCard);
 
 const Container = styled.div`
   display: flex;
