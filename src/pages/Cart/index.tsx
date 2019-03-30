@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
 
+import BeerCard from '../../containers/BeerCard'
 import { AppState } from '../../store'
 import { fetchBeers } from '../../store/beers/actions'
 import { addCartItem, removeCartItem } from '../../store/cart/actions'
@@ -21,7 +22,13 @@ class CartPage extends React.PureComponent<Props> {
     const { cartItems } = this.props;
 
     return (
-      <Container>{cartItems.length === 0 ? <EmptyCart /> : <></>}</Container>
+      <Container>
+        {cartItems.length === 0 ? (
+          <EmptyCart />
+        ) : (
+          cartItems.map(({ id }) => <BeerCard key={id} id={id} cancelOnly />)
+        )}
+      </Container>
     );
   }
 }

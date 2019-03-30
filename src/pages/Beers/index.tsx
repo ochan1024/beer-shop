@@ -61,8 +61,8 @@ class BeersPage extends React.PureComponent<Props> {
             <BeerCardSkeleton />
           </>
         ) : (
-          this.paginatedAndFilteredBeers.map(beer => (
-            <BeerCard key={beer.id} beer={beer} />
+          this.paginatedAndFilteredBeers.map(({ id }) => (
+            <BeerCard key={id} id={id} />
           ))
         )}
 

@@ -4,36 +4,38 @@ import styled from 'styled-components'
 
 import Button from '../../components/Button'
 import { AppState } from '../../store'
-import { Beer } from '../../store/beers/types'
 import { addCartItem, removeCartItem } from '../../store/cart/actions'
 import commaNumber from '../../utils/commaNumber'
 import { Colors } from '../../utils/constants'
 import BeerImage from './Image'
 
 interface OwnProps {
-  beer: Beer;
+  id: number;
   Footer?: ReactElement;
+  cancelOnly?: boolean;
 }
 
 type Props = Readonly<ReturnType<typeof mergeProps>>;
 
 class BeerCard extends React.PureComponent<Props> {
   get tagNames() {
-    return this.props.beer.tags.map(({ name }) => name).join(", ");
+    return this.props.beer
+      ? this.props.beer.tags.map(({ name }) => name).join(", ")
+      : "";
   }
   get stockLeft() {
-    const {
-      beer: { stock },
-      cartItemCount
-    } = this.props;
-    return stock - cartItemCount;
+    const { beer, cartItemCount } = this.props;
+    return beer ? beer.stock - cartItemCount : 0;
   }
 
   public render() {
-    const {
-      beer: { name, image, price },
-      cartItemCount
-    } = this.props;
+    const { beer, cartItemCount, cancelOnly } = this.props;
+
+    if (!beer) {
+      return null;
+    }
+
+    const { name, image, price } = beer;
 
     return (
       <Container>
@@ -61,13 +63,18 @@ class BeerCard extends React.PureComponent<Props> {
         <BottomContainer>
           {cartItemCount > 0 && (
             <Button buttonType="secondary" onClick={this.handleRemoveItem}>
-              빼기
+              {cancelOnly ? "취소" : "빼기"}
             </Button>
           )}
           <EmptyMargin />
-          <Button onClick={this.handleAddItem} disabled={this.stockLeft === 0}>
-            담기
-          </Button>
+          {!cancelOnly && (
+            <Button
+              onClick={this.handleAddItem}
+              disabled={this.stockLeft === 0}
+            >
+              담기
+            </Button>
+          )}
         </BottomContainer>
       </Container>
     );
@@ -75,6 +82,8 @@ class BeerCard extends React.PureComponent<Props> {
 
   private handleAddItem = () => {
     const { addCartItem, beer, cartItemCount } = this.props;
+    if (!beer) return;
+
     const addCount = 1;
 
     if (cartItemCount + addCount > beer.stock) {
@@ -86,6 +95,8 @@ class BeerCard extends React.PureComponent<Props> {
 
   private handleRemoveItem = () => {
     const { removeCartItem, beer, cartItemCount } = this.props;
+    if (!beer) return;
+
     const removeCount = 1;
 
     if (cartItemCount - removeCount < 0) {
@@ -97,10 +108,14 @@ class BeerCard extends React.PureComponent<Props> {
 }
 
 const mapStateToProps = (state: AppState, props: OwnProps) => {
+  const { beers } = state.beersReducer;
+  const beer = beers.find(({ id }) => id === props.id);
   const cartItem = state.cartReducer.cartItems.find(
-    ({ id }) => id === props.beer.id
+    ({ id }) => id === props.id
   );
+
   return {
+    beer,
     cartItemCount: cartItem ? cartItem.count : 0
   };
 };
