@@ -11,8 +11,8 @@ type Props = Readonly<ReturnType<typeof mergeProps>>;
 
 class BeersPage extends React.PureComponent<Props> {
   public componentDidMount() {
-    const { fetchBeers, beers } = this.props;
-    if (beers.length === 0) {
+    const { fetchBeers, beers, isLoadingBeers } = this.props;
+    if (beers.length === 0 && !isLoadingBeers) {
       fetchBeers();
     }
   }
@@ -64,5 +64,4 @@ export default connect(
 
 const Container = styled.div`
   padding: 0 12px;
-  flex: 1;
 `;

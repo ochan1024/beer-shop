@@ -5,9 +5,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import Header from './components/Header'
 import BeersPage from './pages/Beers'
 import CartPage from './pages/Cart'
-import configureStore from './store'
-
-const store = configureStore();
+import store from './store'
 
 class App extends Component {
   render() {
@@ -16,7 +14,7 @@ class App extends Component {
         <BrowserRouter>
           <Header />
           <Switch>
-            <Route path="/" component={BeersPage} />
+            <Route exact path="/" component={BeersPage} />
             <Route path="/beers" component={BeersPage} />
             <Route path="/cart" component={CartPage} />
           </Switch>

@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
 import { Colors, Icon } from '../../utils/constants'
@@ -9,8 +10,12 @@ export default class Header extends React.PureComponent {
       <Container>
         <Title>맥주담기</Title>
         <ButttonsContainer>
-          <Icon.List style={{ marginRight: "14px" }} />
-          <Icon.Cart />
+          <Link to={"/beers"}>
+            <Icon.List style={{ marginRight: "14px" }} />
+          </Link>
+          <Link to={"/cart"}>
+            <Icon.Cart />
+          </Link>
         </ButttonsContainer>
       </Container>
     );
