@@ -20,10 +20,17 @@ class BeerCard extends React.PureComponent<Props> {
   get tagNames() {
     return this.props.beer.tags.map(({ name }) => name).join(", ");
   }
+  get stockLeft() {
+    const {
+      beer: { stock },
+      cartItemCount
+    } = this.props;
+    return stock - cartItemCount;
+  }
 
   public render() {
     const {
-      beer: { name, image, price, stock }
+      beer: { name, image, price }
     } = this.props;
 
     return (
@@ -39,7 +46,7 @@ class BeerCard extends React.PureComponent<Props> {
             </PriceContainer>
             <StockContainer>
               <StockText>재고</StockText>
-              <StockNumber>{stock}</StockNumber>
+              <StockNumber>{this.stockLeft}</StockNumber>
             </StockContainer>
           </InfoContainer>
         </TopCotainer>
@@ -51,10 +58,10 @@ class BeerCard extends React.PureComponent<Props> {
   }
 
   private handleAddItem = () => {
-    const { addCartItem, beer, cartItem } = this.props;
+    const { addCartItem, beer, cartItemCount } = this.props;
     const addCount = 1;
 
-    if (cartItem && cartItem.count > beer.stock + addCount) {
+    if (cartItemCount + addCount > beer.stock) {
       return;
     }
 
@@ -62,9 +69,14 @@ class BeerCard extends React.PureComponent<Props> {
   };
 }
 
-const mapStateToProps = (state: AppState, props: OwnProps) => ({
-  cartItem: state.cartReducer.cartItems.find(({ id }) => id === props.beer.id)
-});
+const mapStateToProps = (state: AppState, props: OwnProps) => {
+  const cartItem = state.cartReducer.cartItems.find(
+    ({ id }) => id === props.beer.id
+  );
+  return {
+    cartItemCount: cartItem ? cartItem.count : 0
+  };
+};
 
 const mapDispatchToProps = {
   addCartItem,
