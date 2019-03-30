@@ -1,7 +1,7 @@
 import React, { ReactElement } from 'react'
 import styled, { css } from 'styled-components'
 
-import { Colors, TextStyles } from '../../utils/constants'
+import { Colors } from '../../utils/constants'
 
 interface OwnProps {
   onClick?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
@@ -28,7 +28,6 @@ export default class Button extends React.PureComponent<OwnProps> {
 }
 
 const Container = styled.button`
-  ${TextStyles.buttonText};
   ${css`
     border-radius: 4px;
     min-width: 44px;
@@ -40,6 +39,8 @@ const Container = styled.button`
     outline: none;
     border: none;
     cursor: pointer;
+    font-size: 12px;
+    color: ${Colors.white};
 
     &:hover {
       opacity: 0.9;

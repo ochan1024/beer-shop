@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import { Colors, Icon, TextStyles } from '../../utils/constants'
+import { Colors, Icon } from '../../utils/constants'
 
 export default class Header extends React.PureComponent {
   public render() {
@@ -34,6 +34,6 @@ const ButttonsContainer = styled.div`
 `;
 
 const Title = styled.span`
-  ${TextStyles.title};
+  font-size: 20px;
   color: ${Colors.grey800};
 `;

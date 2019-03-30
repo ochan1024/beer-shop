@@ -3,7 +3,7 @@ import { Tag } from '../tags/types'
 export interface Beer {
   id: number;
   name: string;
-  image: string;
+  image?: string;
   tags: Tag[];
   price: number;
   stock: number;

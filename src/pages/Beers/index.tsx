@@ -22,7 +22,7 @@ class BeersPage extends React.PureComponent<Props> {
       <Container>
         beer list
         {beers.map(beer => (
-          <BeerCard beer={beer} />
+          <BeerCard key={beer.id} beer={beer} />
         ))}
       </Container>
     );
