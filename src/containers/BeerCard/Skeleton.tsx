@@ -2,8 +2,8 @@ import React from 'react'
 import Skeleton from 'react-loading-skeleton'
 import styled from 'styled-components'
 
+import Button from '../../components/Button'
 import { Colors } from '../../utils/constants'
-import Button from '../Button'
 
 export default class BeerCardSkeleton extends React.PureComponent {
   public render() {

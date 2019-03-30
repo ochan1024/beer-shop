@@ -2,9 +2,9 @@ import React from 'react'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
 
+import Button from '../../components/Button'
 import { AppState } from '../../store'
 import { fetchTags, toggleUserSelectedTag } from '../../store/tags/actions'
-import Button from '../Button'
 import TagsSkeleton from './Skeleton'
 
 type Props = Readonly<ReturnType<typeof mergeProps>>;

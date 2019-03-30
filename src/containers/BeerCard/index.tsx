@@ -1,17 +1,18 @@
-import React from 'react'
+import React, { ReactElement } from 'react'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
 
+import Button from '../../components/Button'
 import { AppState } from '../../store'
 import { Beer } from '../../store/beers/types'
 import { addCartItem, removeCartItem } from '../../store/cart/actions'
 import commaNumber from '../../utils/commaNumber'
 import { Colors } from '../../utils/constants'
-import Button from '../Button'
 import BeerImage from './Image'
 
 interface OwnProps {
   beer: Beer;
+  Footer?: ReactElement;
 }
 
 type Props = Readonly<ReturnType<typeof mergeProps>>;

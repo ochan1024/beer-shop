@@ -3,7 +3,7 @@ import { Provider } from 'react-redux'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import styled from 'styled-components'
 
-import Header from './components/Header'
+import Header from './containers/Header'
 import BeersPage from './pages/Beers'
 import CartPage from './pages/Cart'
 import store from './store'
