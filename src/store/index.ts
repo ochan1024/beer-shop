@@ -1,4 +1,5 @@
 import { applyMiddleware, combineReducers, createStore } from 'redux'
+import { createLogger } from 'redux-logger'
 import thunkMiddleware from 'redux-thunk'
 
 import { beersReducer } from './beers/reducers'
@@ -12,6 +13,10 @@ const rootReducer = combineReducers({
 export type AppState = ReturnType<typeof rootReducer>;
 
 export default function configureStore() {
-  const store = createStore(rootReducer, applyMiddleware(thunkMiddleware));
+  const loggerMiddleware = createLogger({ collapsed: true });
+  const store = createStore(
+    rootReducer,
+    applyMiddleware(thunkMiddleware, loggerMiddleware)
+  );
   return store;
 }
