@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Provider } from 'react-redux'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
+import styled from 'styled-components'
 
 import Header from './components/Header'
 import BeersPage from './pages/Beers'
@@ -13,6 +14,7 @@ class App extends Component {
       <Provider store={store}>
         <BrowserRouter>
           <Header />
+          <EmptyPadding />
           <Switch>
             <Route exact path="/" component={BeersPage} />
             <Route path="/beers" component={BeersPage} />
@@ -25,3 +27,7 @@ class App extends Component {
 }
 
 export default App;
+
+const EmptyPadding = styled.div`
+  height: 64px;
+`;

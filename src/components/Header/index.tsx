@@ -23,6 +23,11 @@ export default class Header extends React.PureComponent {
 }
 
 const Container = styled.div`
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  z-index: 1;
   height: 52px;
   display: flex;
   flex-direction: row;
@@ -31,7 +36,6 @@ const Container = styled.div`
   background-color: ${Colors.white};
   box-shadow: 0 1px 2px 0 ${Colors.greyOpacity10};
   padding: 0 16px;
-  margin-bottom: 12px;
 `;
 
 const ButttonsContainer = styled.div`

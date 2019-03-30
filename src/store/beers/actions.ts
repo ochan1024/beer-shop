@@ -3,7 +3,7 @@ import { ThunkAction } from 'redux-thunk'
 
 import { AppState } from '..'
 import { beersService } from '../../services/beers'
-import { Beer, FETCH_BEERS_FAILURE, FETCH_BEERS_REQUEST, FETCH_BEERS_SUCCESS } from './types'
+import { Beer, FETCH_BEERS_FAILURE, FETCH_BEERS_REQUEST, FETCH_BEERS_SUCCESS, INCREASE_LIMIT } from './types'
 
 function fetchBeersRequest() {
   return {
@@ -39,3 +39,9 @@ export const fetchBeers = (): ThunkAction<
     dispatch(fetchBeersFailure(e.message));
   }
 };
+
+export function increaseLimit() {
+  return {
+    type: INCREASE_LIMIT
+  };
+}
