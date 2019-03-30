@@ -12,9 +12,27 @@ import { Colors } from '../../utils/constants'
 type Props = Readonly<ReturnType<typeof mergeProps>>;
 
 class BeersPage extends React.PureComponent<Props> {
-  get paginatedBeers() {
-    const { beers, limit } = this.props;
-    return beers.slice(0, limit);
+  get paginatedAndFilteredBeers() {
+    const { userSelectedTags, limit, beers } = this.props;
+
+    if (Object.keys(userSelectedTags).length === 0) {
+      // no tags selected
+      return beers.slice(0, limit);
+    }
+
+    return beers
+      .map(beer => {
+        const tagCount = beer.tags.reduce(
+          (acc, cur) => (userSelectedTags[cur.key] ? acc + 1 : acc),
+          0
+        );
+        return {
+          ...beer,
+          tagCount
+        };
+      })
+      .sort((a, b) => b.tagCount - a.tagCount)
+      .slice(0, limit);
   }
 
   get shouldShowLoadMore() {
@@ -43,7 +61,7 @@ class BeersPage extends React.PureComponent<Props> {
             <BeerCardSkeleton />
           </>
         ) : (
-          this.paginatedBeers.map(beer => (
+          this.paginatedAndFilteredBeers.map(beer => (
             <BeerCard key={beer.id} beer={beer} />
           ))
         )}
@@ -65,7 +83,10 @@ class BeersPage extends React.PureComponent<Props> {
 }
 
 const mapStateToProps = (state: AppState) => ({
-  ...state.beersReducer
+  beers: state.beersReducer.beers,
+  isLoadingBeers: state.beersReducer.isLoadingBeers,
+  limit: state.beersReducer.limit,
+  userSelectedTags: state.tagsReducer.userSelectedTags
 });
 
 const mapDispatchToProps = {
