@@ -13,7 +13,8 @@ export const Colors = {
   greyOpacity10: "rgba(0, 0, 0, 0.1)",
   blue100: "#c9d5f3",
   blue400: "#4e7bfa",
-  blue500: "#3369e8"
+  blue500: "#3369e8",
+  red400: "#ef5350"
 };
 
 export { Icon };

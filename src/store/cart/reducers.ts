@@ -24,7 +24,7 @@ export function cartReducer(
         const prevCount = newCartItems[index].count;
         newCartItems[index].count = prevCount + addCount;
       }
-      console.log(newCartItems);
+
       return {
         ...state,
         cartItems: newCartItems

@@ -1,13 +1,18 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import { Link, RouteComponentProps, withRouter } from 'react-router-dom'
 import styled from 'styled-components'
 
+import { AppState } from '../../store'
 import { Colors, Icon } from '../../utils/constants'
 
-class Header extends React.PureComponent<RouteComponentProps> {
+type Props = Readonly<RouteComponentProps & ReturnType<typeof mapStateToProps>>;
+
+class Header extends React.PureComponent<Props> {
   public render() {
     const {
-      location: { pathname }
+      location: { pathname },
+      cartItemLength
     } = this.props;
 
     return (
@@ -27,15 +32,22 @@ class Header extends React.PureComponent<RouteComponentProps> {
               fillColor={pathname === "/cart" ? Colors.blue500 : Colors.grey700}
             />
           </Link>
+          {cartItemLength > 0 && (
+            <Badge>
+              <BadgeText>{cartItemLength}</BadgeText>
+            </Badge>
+          )}
         </ButttonsContainer>
       </Container>
     );
   }
 }
 
-export default withRouter((props: RouteComponentProps) => (
-  <Header {...props} />
-));
+const mapStateToProps = (state: AppState) => ({
+  cartItemLength: state.cartReducer.cartItems.length
+});
+
+export default withRouter(connect(mapStateToProps)(Header));
 
 const Container = styled.div`
   position: fixed;
@@ -54,10 +66,29 @@ const Container = styled.div`
 `;
 
 const ButttonsContainer = styled.div`
+  position: relative;
   padding-top: 4px;
 `;
 
 const Title = styled.span`
   font-size: 20px;
   color: ${Colors.grey800};
+`;
+
+const Badge = styled.div`
+  position: absolute;
+  top: -3px;
+  right: -9px;
+  height: 18px;
+  background-color: ${Colors.red400};
+  border-radius: 100%;
+  padding: 0 6px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const BadgeText = styled.span`
+  font-size: 10px;
+  color: ${Colors.white};
 `;
