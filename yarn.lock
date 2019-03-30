@@ -1092,6 +1092,13 @@
   dependencies:
     "@types/react" "*"
 
+"@types/react-lottie@^1.2.2":
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/@types/react-lottie/-/react-lottie-1.2.2.tgz#2d4f8a7fb6831f89e915c1944c2f37721f06f167"
+  integrity sha512-ARFwpddiJXSz0k/Cgvu4tkc7kXmutoUmF4f2xBnSgDG7vF9i8ChOGb++kpo+Zt5SNyRsZvI5wJTCHwGn7ATiwQ==
+  dependencies:
+    "@types/react" "*"
+
 "@types/react-native@*":
   version "0.57.42"
   resolved "https://registry.yarnpkg.com/@types/react-native/-/react-native-0.57.42.tgz#06ad92cd1378146402b7667de13cb7b935d194d6"
@@ -6291,6 +6298,11 @@ loose-envify@^1.0.0, loose-envify@^1.1.0, loose-envify@^1.2.0, loose-envify@^1.3
   dependencies:
     js-tokens "^3.0.0 || ^4.0.0"
 
+lottie-web@^5.1.3:
+  version "5.5.0"
+  resolved "https://registry.yarnpkg.com/lottie-web/-/lottie-web-5.5.0.tgz#a9e31993838bb18e7fe4c0a0c8024a6d611ff329"
+  integrity sha512-48fvmeeWak0b1L0mdXV2z47D05ZC2+Sc0BEKTZlW7L1vesjNr/jm9ZeLJt634TqV4UZl5EPfA65sBiyU45UXtQ==
+
 lower-case@^1.1.1:
   version "1.1.4"
   resolved "https://registry.yarnpkg.com/lower-case/-/lower-case-1.1.4.tgz#9a2cabd1b9e8e0ae993a4bf7d5875c39c42e8eac"
@@ -8350,6 +8362,14 @@ react-loading-skeleton@^1.1.1:
   integrity sha512-CsyGZlAWUShmqUiQSMn4r120uCvGfVThsLlt07zXqu5pKVew64UoclV5QAVzdgkwKZLRbVxwkJN+48KyL/KR2A==
   dependencies:
     emotion "^9.2.8"
+
+react-lottie@^1.2.3:
+  version "1.2.3"
+  resolved "https://registry.yarnpkg.com/react-lottie/-/react-lottie-1.2.3.tgz#8544b96939e088658072eea5e12d912cdaa3acc1"
+  integrity sha512-qLCERxUr8M+4mm1LU0Ruxw5Y5Fn/OmYkGfnA+JDM/dZb3oKwVAJCjwnjkj9TMHtzR2U6sMEUD3ZZ1RaHagM7kA==
+  dependencies:
+    babel-runtime "^6.26.0"
+    lottie-web "^5.1.3"
 
 react-redux@^6.0.1:
   version "6.0.1"

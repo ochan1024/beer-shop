@@ -4,6 +4,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import styled from 'styled-components'
 
 import Header from './containers/Header'
+import Loader from './containers/Loader'
 import BeersPage from './pages/Beers'
 import CartPage from './pages/Cart'
 import store from './store'
@@ -14,6 +15,7 @@ class App extends Component {
       <Provider store={store}>
         <BrowserRouter>
           <Header />
+          <Loader />
           <EmptyPadding />
           <Switch>
             <Route exact path="/" component={BeersPage} />

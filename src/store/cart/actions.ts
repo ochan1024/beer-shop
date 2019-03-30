@@ -1,4 +1,4 @@
-import { ADD_CART_ITEM, REMOVE_CART_ITEM } from './types'
+import { ADD_CART_ITEM, EMPTY_CART_ITEMS, REMOVE_CART_ITEM } from './types'
 
 export function addCartItem(id: number, count: number) {
   return {
@@ -17,5 +17,11 @@ export function removeCartItem(id: number, count: number) {
       id,
       count
     }
+  };
+}
+
+export function emptyCartItems() {
+  return {
+    type: EMPTY_CART_ITEMS
   };
 }

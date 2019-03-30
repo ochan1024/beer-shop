@@ -4,6 +4,7 @@ import styled from 'styled-components'
 
 import Button from '../../components/Button'
 import { AppState } from '../../store'
+import { fetchPurchase } from '../../store/purchase/actions'
 import commaNumber from '../../utils/commaNumber'
 import { Colors } from '../../utils/constants'
 
@@ -30,7 +31,7 @@ class CartFooter extends React.PureComponent<Props> {
   }
 
   public render() {
-    const { cartItems } = this.props;
+    const { cartItems, isLoadingPurchase } = this.props;
 
     if (cartItems.length === 0) {
       return null;
@@ -45,19 +46,32 @@ class CartFooter extends React.PureComponent<Props> {
           총 결제금액{" "}
           <PurchaseNumber>{commaNumber(this.totalPrice)}</PurchaseNumber> 원
         </PurchaseText>
-        <Button style={buttonStyle}>구매하기</Button>
+        <Button
+          style={buttonStyle}
+          onClick={this.handlePurchase}
+          isLoading={isLoadingPurchase}
+        >
+          구매하기
+        </Button>
       </Container>
     );
   }
+
+  private handlePurchase = async () => {
+    const { fetchPurchase, cartItems } = this.props;
+    const result = await fetchPurchase(cartItems);
+    console.log("구매 결과", result);
+  };
 }
 
 const mapStateToProps = (state: AppState) => ({
   cartItems: state.cartReducer.cartItems,
-  beerMap: state.beersReducer.beerMap
+  beerMap: state.beersReducer.beerMap,
+  isLoadingPurchase: state.purchaseReducer.isLoadingPurchase
 });
 
 const mapDispatchToProps = {
-  // add purchase
+  fetchPurchase
 };
 
 const mergeProps = (

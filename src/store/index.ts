@@ -4,12 +4,16 @@ import thunkMiddleware from 'redux-thunk'
 
 import { beersReducer } from './beers/reducers'
 import { cartReducer } from './cart/reducers'
+import { purchaseReducer } from './purchase/reducers'
 import { tagsReducer } from './tags/reducers'
+import { UIReducer } from './ui/reducers'
 
 const rootReducer = combineReducers({
   beersReducer,
   tagsReducer,
-  cartReducer
+  cartReducer,
+  purchaseReducer,
+  UIReducer
 });
 
 export type AppState = ReturnType<typeof rootReducer>;

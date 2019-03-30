@@ -16,19 +16,19 @@ class Client {
     return this.call<T>("GET", url);
   }
 
-  public post<T>(url: string, body: Body) {
+  public post<T>(url: string, body: string | object) {
     return this.call<T>("POST", url, body);
   }
 
-  public put<T>(url: string, body: Body) {
+  public put<T>(url: string, body: string | object) {
     return this.call<T>("PUT", url, body);
   }
 
-  public patch<T>(url: string, body: Body) {
+  public patch<T>(url: string, body: string | object) {
     return this.call<T>("PATCH", url, body);
   }
 
-  public delete<T>(url: string, body: Body) {
+  public delete<T>(url: string, body: string | object) {
     return this.call<T>("DELETE", url, body);
   }
 
@@ -48,7 +48,12 @@ class Client {
       method,
       headers,
       ...options
-    }).then(res => res.json()) as Promise<T>;
+    }).then(res => {
+      if (res.status >= 400) {
+        return res.json().then(Promise.reject.bind(Promise));
+      }
+      return res.json();
+    }) as Promise<T>;
   }
 }
 

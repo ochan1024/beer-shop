@@ -1,4 +1,4 @@
-import { ADD_CART_ITEM, CartActionTypes, CartState, REMOVE_CART_ITEM } from './types'
+import { ADD_CART_ITEM, CartActionTypes, CartState, EMPTY_CART_ITEMS, REMOVE_CART_ITEM } from './types'
 
 const initialState: CartState = {
   cartItems: []
@@ -53,6 +53,13 @@ export function cartReducer(
       return {
         ...state,
         cartItems: newCartItems
+      };
+    }
+
+    case EMPTY_CART_ITEMS: {
+      return {
+        ...state,
+        cartItems: []
       };
     }
 
