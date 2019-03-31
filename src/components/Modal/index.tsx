@@ -14,7 +14,7 @@ export default class Modal extends React.PureComponent<OwnProps> {
 }
 
 const Container = styled.div<{ isVisible?: boolean }>`
-  position: absolute;
+  position: fixed;
   top: 0;
   right: 0;
   bottom: 0;
