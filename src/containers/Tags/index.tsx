@@ -37,6 +37,7 @@ class Tags extends React.PureComponent<Props> {
             </ButtonContainer>
           ))
         )}
+        <EmptyPadding />
       </Container>
     );
   }
@@ -75,9 +76,15 @@ const Container = styled.div`
   display: flex;
   flex-direction: row;
   height: 30px;
+  padding-left: 12px;
   margin-bottom: 12px;
+  overflow-y: scroll;
 `;
 
 const ButtonContainer = styled.div`
   margin-right: 8px;
+`;
+
+const EmptyPadding = styled.div`
+  min-width: 4px;
 `;

@@ -54,17 +54,20 @@ class BeersPage extends React.PureComponent<Props> {
     return (
       <Container>
         <Tags />
-        {isLoadingBeers ? (
-          <>
-            <BeerCardSkeleton />
-            <BeerCardSkeleton />
-            <BeerCardSkeleton />
-          </>
-        ) : (
-          this.paginatedAndFilteredBeers.map(({ id }) => (
-            <BeerCard key={id} id={id} />
-          ))
-        )}
+
+        <CardContainer>
+          {isLoadingBeers ? (
+            <>
+              <BeerCardSkeleton />
+              <BeerCardSkeleton />
+              <BeerCardSkeleton />
+            </>
+          ) : (
+            this.paginatedAndFilteredBeers.map(({ id }) => (
+              <BeerCard key={id} id={id} />
+            ))
+          )}
+        </CardContainer>
 
         {this.shouldShowLoadMore && (
           <BottomContainer>
@@ -108,7 +111,9 @@ export default connect(
   mergeProps
 )(BeersPage);
 
-const Container = styled.div`
+const Container = styled.div``;
+
+const CardContainer = styled.div`
   padding: 0 12px;
 `;
 

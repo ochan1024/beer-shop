@@ -84,6 +84,7 @@ const Container = styled.button<ButtonContainerProps>`
   font-size: 12px;
   background-color: ${Colors.blue500};
   color: ${Colors.white};
+  white-space: nowrap;
 
   ${props =>
     props.toggled
