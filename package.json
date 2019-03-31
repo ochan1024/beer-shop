@@ -18,6 +18,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "start:prod": "cross-env REACT_APP_DEV_ENV=production react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -40,6 +41,7 @@
     "@types/react-redux": "^7.0.5",
     "@types/react-router-dom": "^4.3.1",
     "@types/redux-logger": "^3.0.7",
-    "@types/styled-components": "^4.1.12"
+    "@types/styled-components": "^4.1.12",
+    "cross-env": "^5.2.0"
   }
 }

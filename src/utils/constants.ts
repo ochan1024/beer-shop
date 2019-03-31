@@ -1,6 +1,13 @@
 import * as Icon from '../components/Icon'
 
-export const API_URL = "http://localhost:3001/api";
+const USE_PROD =
+  process.env.NODE_ENV === "production" ||
+  process.env.REACT_APP_DEV_ENV === "production";
+
+export const API_URL = USE_PROD
+  ? "http://beer.youngchanje.com/api"
+  : "http://localhost:3001/api";
+
 export const Colors = {
   white: "#ffffff",
   grey100: "#f2f3f7",
