@@ -23,7 +23,9 @@ class Header extends React.PureComponent<Props> {
             <Icon.List
               style={{ marginRight: "14px" }}
               fillColor={
-                pathname === "/beers" ? Colors.blue500 : Colors.grey700
+                pathname === "/beers" || pathname === "/"
+                  ? Colors.blue500
+                  : Colors.grey700
               }
             />
           </Link>
