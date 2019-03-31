@@ -50,7 +50,7 @@ class Client {
       ...options
     }).then(res => {
       if (res.status >= 400) {
-        return res.json().then(Promise.reject.bind(Promise));
+        return Promise.reject(res.json());
       }
       return res.json();
     }) as Promise<T>;
