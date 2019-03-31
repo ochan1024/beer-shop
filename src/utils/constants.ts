@@ -1,6 +1,7 @@
 import * as Icon from '../components/Icon'
 
-const USE_PROD =
+export const IS_PRODUCTION = process.env.NODE_ENV === "production";
+export const USE_PROD =
   process.env.NODE_ENV === "production" ||
   process.env.REACT_APP_DEV_ENV === "production";
 

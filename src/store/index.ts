@@ -1,7 +1,7 @@
 import { applyMiddleware, combineReducers, createStore } from 'redux'
-import { createLogger } from 'redux-logger'
 import thunkMiddleware from 'redux-thunk'
 
+import { IS_PRODUCTION } from '../utils/constants'
 import { beersReducer } from './beers/reducers'
 import { cartReducer } from './cart/reducers'
 import { purchaseReducer } from './purchase/reducers'
@@ -18,10 +18,10 @@ const rootReducer = combineReducers({
 
 export type AppState = ReturnType<typeof rootReducer>;
 
-const loggerMiddleware = createLogger({ collapsed: true });
-const store = createStore(
-  rootReducer,
-  applyMiddleware(thunkMiddleware, loggerMiddleware)
-);
+const middleware = [
+  thunkMiddleware,
+  !IS_PRODUCTION && require("redux-logger").createLogger({ collapsed: true })
+].filter(Boolean);
+const store = createStore(rootReducer, applyMiddleware(...middleware));
 
 export default store;
