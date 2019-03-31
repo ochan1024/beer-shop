@@ -12,12 +12,12 @@ import { Colors } from '../../utils/constants'
 type Props = Readonly<ReturnType<typeof mergeProps>>;
 
 class BeersPage extends React.PureComponent<Props> {
-  get paginatedAndFilteredBeers() {
-    const { userSelectedTags, limit, beers } = this.props;
+  get filteredBeers() {
+    const { userSelectedTags, beers } = this.props;
 
     if (Object.keys(userSelectedTags).length === 0) {
       // no tags selected
-      return beers.slice(0, limit);
+      return beers;
     }
 
     return beers
@@ -32,13 +32,17 @@ class BeersPage extends React.PureComponent<Props> {
         };
       })
       .filter(({ tagCount }) => tagCount > 0)
-      .sort((a, b) => b.tagCount - a.tagCount)
-      .slice(0, limit);
+      .sort((a, b) => b.tagCount - a.tagCount);
+  }
+
+  get paginatedBeers() {
+    const { limit } = this.props;
+    return this.filteredBeers.slice(0, limit);
   }
 
   get shouldShowLoadMore() {
-    const { beers, limit } = this.props;
-    return beers.length > limit;
+    const { limit } = this.props;
+    return this.filteredBeers.length > limit;
   }
 
   public componentDidMount() {
@@ -64,9 +68,7 @@ class BeersPage extends React.PureComponent<Props> {
               <BeerCardSkeleton />
             </>
           ) : (
-            this.paginatedAndFilteredBeers.map(({ id }) => (
-              <BeerCard key={id} id={id} />
-            ))
+            this.paginatedBeers.map(({ id }) => <BeerCard key={id} id={id} />)
           )}
         </CardContainer>
 
