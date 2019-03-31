@@ -31,6 +31,7 @@ class BeersPage extends React.PureComponent<Props> {
           tagCount
         };
       })
+      .filter(({ tagCount }) => tagCount > 0)
       .sort((a, b) => b.tagCount - a.tagCount)
       .slice(0, limit);
   }
